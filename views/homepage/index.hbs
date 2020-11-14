@@ -1,0 +1,87 @@
+<main role="main" class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>URLs</h1>
+    </div>
+  </div>
+
+  {{#if urls}}
+  <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Full URL</th>
+          <th>Short URL</th>
+          <th>Redirection</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th><a href={{urls.longUrl}}></a> {{urls.longUrl}}</th>
+          <th><a href={{urls.shortUrl}}></a> {{urls.shortUrl}}</th>
+          <th>{{urls.redirectCount}}</th>
+        </tr>
+      </tbody>
+    </table>
+  {{else}}
+
+  <div class="row">
+    <div class="col-lg-12">
+      <form class="form-inline" action="/urls" method="POST">
+        <div class="input-group w-100">
+          <input
+            id="long_url"
+            type="text"
+            name="longUrl"
+            placeholder="url to shorten..."
+            class="form-control">
+          <div class="input-group-append">
+            <button type="submit" class="btn btn-primary"> Shorten </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  {{/if}}
+
+  {{#if urlsCreated}}
+  <div class="row">  
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <th>Full URL</th>
+          <th>Short URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each urlsCreated}}
+        <tr>
+          <th><a href={{longUrl}}></a> {{longUrl}}</th>
+          <th><a href={{shortUrl}}></a> {{shortUrl}}</th>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+    {{/if}}
+
+
+    {{!-- <div class="col-lg-12" id="url_list">
+      {{#each tasks}}
+      <div class="card my-3 {{#eq status 'done' }}bg-light{{/eq}}">
+      {{#eq status 'done' }}
+        <span class="text-secondary text-right p-1">This task is done</span>
+      {{/eq}}
+      {{#eq status 'pending'}}
+        <span class="text-secondary text-right p-1">This task is pending</span>
+      {{/eq}}
+        <div class="card-body">
+          <p class="card-text">{{ description }}</p>
+          {{#eq status 'pending'}}
+            <input id="{{id}}" type="button" onclick="taskCompleted(this)" value="Done" class="btn btn-primary">
+          {{/eq}}
+          <input id="del-{{id}}" type="button" onclick="deleteTask(this)" value="Delete" class="btn btn-danger">
+        </div>
+      </div>
+      {{/each}}
+    </div> --}}
+  </div>
+</main>
